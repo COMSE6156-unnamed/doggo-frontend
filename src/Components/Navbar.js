@@ -10,7 +10,9 @@ import Typography from "@mui/material/Typography";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -18,6 +20,12 @@ const darkTheme = createTheme({
 });
 
 function Navbar() {
+  const [value, setValue] = React.useState('1');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar position="static" theme={darkTheme}>
@@ -46,13 +54,13 @@ function Navbar() {
               LeetDoge
             </Typography>
             <Box sx={{ flexGrow: 6 }}>
-              <Link to="/dog">
-                <Button color="inherit">Doggo</Button>
-              </Link>
-
-              <Link to="/quiz">
-                <Button color="inherit">Quiz</Button>
-              </Link>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+              >
+                <Tab label="Doggo" to="/dog" component={Link} />
+                <Tab label="Quiz" to="/quiz" component={Link} />
+              </Tabs>
             </Box>
             <IconButton>
               <Link to="/profile">
