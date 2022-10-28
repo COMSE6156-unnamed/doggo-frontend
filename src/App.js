@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './Components/Navbar'
 import HomePage from './Pages/HomePage';
 import ProfilePage from './Pages/ProfilePage';
 import DogPage from './Pages/DogPage';
@@ -8,6 +9,7 @@ import QuizPage from './Pages/QuizPage';
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path = "/" element = { <HomePage/>} />
         <Route path = "/profile" element = { <ProfilePage/> } />
