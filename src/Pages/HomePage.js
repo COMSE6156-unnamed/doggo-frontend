@@ -1,12 +1,13 @@
-import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+import Container from "@mui/material/Container";
+import React from 'react';
+import commonStyle from "../css/commonStyle";
 
-import Navbar from '../Components/Navbar'
-
-function HomePage () {
-    return <div>Home</div>
+function HomePage() {
+  return (
+    <Container maxWidth={false} sx={commonStyle.pageContainerStyle}>
+        Home Page
+    </Container>
+  );
 }
 
 export default HomePage;
