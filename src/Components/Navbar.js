@@ -26,7 +26,7 @@ const darkTheme = createTheme({
 });
 
 function Navbar() {
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
