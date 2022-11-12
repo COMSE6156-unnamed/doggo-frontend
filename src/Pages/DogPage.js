@@ -89,7 +89,7 @@ function DogPage() {
   }, []);
   return (
     <Container maxWidth={false} sx={commonStyle.pageContainerStyle}>
-      {dogs && dogs.map((dog) => <DogCard dog={dog} />)}
+      {dogs && dogs.map((dog) => <DogCard key={dog.id} dog={dog}/>)}
       <Container>
         <DogPagination
           handleClickPrev={handleClickPrev}
