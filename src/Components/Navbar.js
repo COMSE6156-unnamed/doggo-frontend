@@ -54,7 +54,7 @@ function Navbar() {
             </Typography>
             <Box sx={navbarStyle.tabBox}>
               <Tabs value={value} onChange={handleChange}>
-                <Tab label="Doggo" to={commonConstants.dogRoute} component={Link} />
+                <Tab label="Doggo" to={commonConstants.dogRoute} component={Link} onClick={() => window.location.reload()} />
                 <Tab label="Quiz" to={commonConstants.quizRoute} component={Link} />
               </Tabs>
             </Box>

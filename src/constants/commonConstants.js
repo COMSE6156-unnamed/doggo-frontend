@@ -1,5 +1,5 @@
 const dogeImageSrc = "img/doge.png";
-const dogRoute = "/dog";
+const dogRoute = "/dogs";
 const profileRoute = "/profile";
 const quizRoute = "/quiz";
 const rootRoute = "/";
