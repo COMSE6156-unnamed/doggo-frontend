@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import DogCard from "../Components/DogCard";
 import DogPagination from "../Components/DogPagination";
 import apiRoutes from "../constants/apiRoutes";
+import commonConstants from "../constants/commonConstants";
 import commonStyle from "../css/commonStyle";
 import dogConstants from "../constants/dogConstants";
 import { httpCall } from "../utils/httpCall";
@@ -20,10 +21,10 @@ function DogPage() {
   const getDogs = async () => {
     const response = await httpCall(apiRoutes.getAllDogs, "GET", null, null);
     setDogs(response.data);
-    setPrevLink(response.links.prev.href);
-    setNextLink(response.links.next.href);
-
-    const cOffset = getOffset(response.links.curr.href);
+    setPrevLink(getLink(response.links, commonConstants.linkTypePrev));
+    setNextLink(getLink(response.links, commonConstants.linkTypeNext));
+    
+    const cOffset = getOffset(getLink(response.links, commonConstants.linkTypeCurr));
     if (cOffset == 0) {
       setDisablePrev(true);
     } else {
@@ -40,10 +41,10 @@ function DogPage() {
   const handleClickPrev = async () => {
     const response = await httpCall(prevLink, "GET", null, null);
     setDogs(response.data);
-    setPrevLink(response.links.prev.href);
-    setNextLink(response.links.next.href);
-
-    const cOffset = getOffset(response.links.curr.href);
+    setPrevLink(getLink(response.links, commonConstants.linkTypePrev));
+    setNextLink(getLink(response.links, commonConstants.linkTypeNext));
+    
+    const cOffset = getOffset(getLink(response.links, commonConstants.linkTypeCurr));
     if (cOffset == 0) {
       setDisablePrev(true);
     } else {
@@ -60,11 +61,10 @@ function DogPage() {
   const handleClickNext = async () => {
     const response = await httpCall(nextLink, "GET", null, null);
     setDogs(response.data);
-    setPrevLink(response.links.prev.href);
-    setNextLink(response.links.next.href);
+    setPrevLink(getLink(response.links, commonConstants.linkTypePrev));
+    setNextLink(getLink(response.links, commonConstants.linkTypeNext));
     
-    const cOffset = getOffset(response.links.curr.href);
-    
+    const cOffset = getOffset(getLink(response.links, commonConstants.linkTypeCurr));
     if (cOffset == 0) {
       setDisablePrev(true);
     } else {
@@ -84,6 +84,9 @@ function DogPage() {
     return parsed.offset ? parsed.offset : 0;
   };
 
+  const getLink = (linkArray, linkType) => {
+    return linkArray.find(item => item.rel == linkType).href;
+  }
   useEffect(() => {
     getDogs();
   }, []);

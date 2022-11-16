@@ -5,7 +5,6 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 
 const theme = createTheme({
@@ -32,18 +31,15 @@ export default function DogPagination({
           right: 16,
         }}
       >
-        <Button onClick={handleClickPrev} disabled={disablePrev}>
-          <Fab variant="extended" color="primary">
-            <ArrowCircleLeftIcon sx={{ mr: 1 }} />
-            Previous
-          </Fab>
-        </Button>
-        <Button onClick={handleClickNext} disabled={disableNext}>
-          <Fab variant="extended" color="primary">
-            <ArrowCircleRightIcon sx={{ mr: 1 }} />
-            Next
-          </Fab>
-        </Button>
+        <Fab variant="extended" color="primary" onClick={handleClickPrev}>
+          <ArrowCircleLeftIcon sx={{ mr: 1 }} />
+          Previous
+        </Fab>
+
+        <Fab variant="extended" color="primary" onClick={handleClickNext}>
+          <ArrowCircleRightIcon sx={{ mr: 1 }} />
+          Next
+        </Fab>
       </Box>
     </ThemeProvider>
   );
