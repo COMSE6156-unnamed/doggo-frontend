@@ -12,6 +12,6 @@ $ npm run start
 
 - Paths that are already setup
     -  `/`: The home page
-    - `/dog`: The page for dog info
+    - `/dogs`: The page for dog info
     - `/profile`: The page for user profile
     - `/quiz`: The page for quiz

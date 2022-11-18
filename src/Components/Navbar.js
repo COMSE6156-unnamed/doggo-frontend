@@ -1,7 +1,6 @@
 import "../css/common.css";
 
-import * as React from "react";
-
+import {React, useState} from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -18,6 +17,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import commonConstants from "../constants/commonConstants";
 import navbarStyle from "../css/navbarStyle";
+import { useLocation } from 'react-router-dom';
 
 const darkTheme = createTheme({
   palette: {
@@ -26,11 +26,26 @@ const darkTheme = createTheme({
 });
 
 function Navbar() {
-  const [value, setValue] = React.useState("1");
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  
+  let location = useLocation();
+  const currentTab = () => {
+    let path = location.pathname;
+    if (path === commonConstants.dogRoute) return 0;
+    else if (path === commonConstants.quizRoute) return 1;
+    else return 2;
   };
+  const [value, setValue] = useState(currentTab);
+  const handleClickDoggo = (event, newValue) => {
+    setValue(currentTab);
+    window.location.href = commonConstants.dogRoute;
+  }
+
+  const handleClickQuiz = (event, newValule) => {
+    setValue(currentTab);
+    window.location.href = commonConstants.quizRoute;
+  }
+
+    
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -53,9 +68,9 @@ function Navbar() {
               LeetDoge
             </Typography>
             <Box sx={navbarStyle.tabBox}>
-              <Tabs value={value} onChange={handleChange}>
-                <Tab label="Doggo" to={commonConstants.dogRoute} component={Link} />
-                <Tab label="Quiz" to={commonConstants.quizRoute} component={Link} />
+              <Tabs value={value} >
+                <Tab label="Doggo" to={commonConstants.dogRoute} component={Link} onClick={handleClickDoggo} />
+                <Tab label="Quiz" to={commonConstants.quizRoute} component={Link} onClick={handleClickQuiz} />
               </Tabs>
             </Box>
             <IconButton sx={navbarStyle.profileButton}>
