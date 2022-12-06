@@ -1,24 +1,22 @@
 import { React, useEffect, useState } from "react";
 
 import Button from "@mui/material/Button";
+import Cookies from 'js-cookie'
 import { httpCall } from "../utils/httpCall";
 import { useCookies } from "react-cookie";
 
 function ProfilePage () {
-    const [cookies, setCookie] = useCookies(['session']);
-    const handleClickLogin = async () => {
-        console.log('handleClickLogin')
-        const response = await httpCall('http://127.0.0.1:5000/login/google', "GET", null, null);
-        console.log('response', response);
-    }
+    const [cookies, setCookie] = useCookies();
     
     useEffect(() => {
-        console.log('cookie', cookies)
+        console.log('cook', Cookies.get());
+        
       }, []);
 
     return (
         <div>
-            <Button onClick={handleClickLogin}>Login</Button>
+            <Button href="http://127.0.0.1:5000/login/google">Login</Button>
+            <Button href="http://127.0.0.1:5000/logout">Logout</Button>
         </div>
     )
 }
