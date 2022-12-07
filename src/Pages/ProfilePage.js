@@ -1,24 +1,16 @@
 import { React, useEffect, useState } from "react";
 
 import AspectRatio from "@mui/joy/AspectRatio";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardOverflow from "@mui/joy/CardOverflow";
-import { ConstructionOutlined } from "@mui/icons-material";
 import Container from "@mui/material/Container";
 import Cookies from "js-cookie";
-import Divider from "@mui/joy/Divider";
 import Typography from "@mui/material/Typography";
-import commonConstants from "../constants/commonConstants";
 import commonStyle from "../css/commonStyle";
-import { httpCall } from "../utils/httpCall";
 import jwt_decode from "jwt-decode";
 
 function ProfilePage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState(false);
   const [name, setName] = useState("");
   const [pictureUrl, setPictureUrl] = useState("");
@@ -27,12 +19,9 @@ function ProfilePage() {
     const allCookies = Cookies.get();
     if (allCookies.id_token) {
       const decoded = jwt_decode(allCookies.id_token);
-      console.log("decoded");
-      console.log(decoded);
       setEmail(decoded.email);
       setName(decoded.name);
       setPictureUrl(decoded.picture);
-      setIsLoggedIn(true);
     }
   };
 

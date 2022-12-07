@@ -1,7 +1,9 @@
 import Cookies from "js-cookie";
+import apiRoutes from "../constants/apiRoutes";
+import userConstants from "../constants/userConstants";
 
 export const logout = () => {
-    window.location.href = 'http://127.0.0.1:5000/logout';
-    Cookies.remove("access_token");
-    Cookies.remove("id_token");
+    window.location.href = apiRoutes.logoutRoute;
+    Cookies.remove(userConstants.accessTokenKey);
+    Cookies.remove(userConstants.idTokenKey);
 }

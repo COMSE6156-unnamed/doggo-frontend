@@ -137,7 +137,7 @@ function Navbar() {
                 </Menu>
               </div>
             )}
-            {!isLoggedIn && <Button onClick={login}>Login</Button>}
+            {!isLoggedIn && <Button onClick={login} sx={{marginRight: 3}}>Login</Button>}
           </Toolbar>
         </Container>
       </AppBar>
