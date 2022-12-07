@@ -1,7 +1,9 @@
 import "./App.css";
 
+import {React, useEffect, useState} from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
+import Cookies from "js-cookie";
 import DogPage from "./Pages/DogPage";
 import HomePage from "./Pages/HomePage";
 import Navbar from "./Components/Navbar";
@@ -10,6 +12,7 @@ import QuizPage from "./Pages/QuizPage";
 import commonConstants from "./constants/commonConstants";
 
 function App() {
+  
   return (
     <Router>
       <Navbar />
