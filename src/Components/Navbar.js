@@ -102,12 +102,14 @@ function Navbar() {
                   component={Link}
                   onClick={handleClickDoggo}
                 />
-                <Tab
-                  label="Quiz"
-                  to={commonConstants.quizRoute}
-                  component={Link}
-                  onClick={handleClickQuiz}
-                />
+                {isLoggedIn && (
+                  <Tab
+                    label="Quiz"
+                    to={commonConstants.quizRoute}
+                    component={Link}
+                    onClick={handleClickQuiz}
+                  />
+                )}
               </Tabs>
             </Box>
             {isLoggedIn && (
@@ -137,7 +139,11 @@ function Navbar() {
                 </Menu>
               </div>
             )}
-            {!isLoggedIn && <Button onClick={login} sx={{marginRight: 3}}>Login</Button>}
+            {!isLoggedIn && (
+              <Button onClick={login} sx={{ marginRight: 3 }}>
+                Login
+              </Button>
+            )}
           </Toolbar>
         </Container>
       </AppBar>
