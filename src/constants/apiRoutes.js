@@ -1,7 +1,9 @@
-const getAllDogs = `${process.env.REACT_APP_DOGINFO_API_HOST}/dogs`;
+const getAllDogs = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT}/dogs`;
+const quizBasePath = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT}/quiz`;
 
 const apiRoutes = {
-    getAllDogs
+    getAllDogs,
+    quizBasePath
 }
 
 export default apiRoutes;
