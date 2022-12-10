@@ -16,7 +16,7 @@ const navbarStyle = {
     flexGrow: 3
   },
   profileButton: {
-    paddingRight: '2%'
+    paddingRight: 3
   }
 };
 
