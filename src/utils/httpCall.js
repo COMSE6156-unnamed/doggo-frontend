@@ -6,7 +6,7 @@ export const httpCall = async (http, method, token, body) => {
       method: method,
       headers: {
         Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: method === "GET" || body === null ? null : JSON.stringify(body),
     });
@@ -14,7 +14,7 @@ export const httpCall = async (http, method, token, body) => {
     req = await fetch(http, {
       method: method,
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: method === "GET" || body === null ? null : JSON.stringify(body),
     });
