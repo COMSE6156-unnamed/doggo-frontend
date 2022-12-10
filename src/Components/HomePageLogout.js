@@ -10,7 +10,7 @@ import { logout } from "../utils/logout";
 export default function HomePageLoggedIn() {
   return (
     <Card>
-      <CardMedia component="img" image={commonConstants.dogeWeeeImageSrc} />
+      <CardMedia component="img" image={commonConstants.weeeDogeImageSrc} />
       <CardContent sx={{justifyContent: 'center', display:'flex', flexDirection: 'column'}}>
         <CardHeader title={"You are logged in!!!"} />
         <Button size="large" variant="outlined" onClick={logout}>Log out to be not pawesome again</Button>

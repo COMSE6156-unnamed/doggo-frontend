@@ -10,7 +10,7 @@ import { login } from "../utils/login";
 export default function HomePageLogin() {
   return (
     <Card px={3} >
-      <CardMedia component="img" image={commonConstants.dogeSadImageSrc} />
+      <CardMedia component="img" image={commonConstants.sadDogeImageSrc} />
       <CardContent sx={{justifyContent: 'center', display:'flex', flexDirection: 'column'}}>
         <CardHeader title={"You are not logged in. Log in to be pawesome!!!"} />
         <Button size="large" variant="outlined" onClick={login}>Login</Button>
