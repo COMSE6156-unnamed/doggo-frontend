@@ -7,9 +7,11 @@ import HomePage from "./Pages/HomePage";
 import Navbar from "./Components/Navbar";
 import ProfilePage from "./Pages/ProfilePage";
 import QuizPage from "./Pages/QuizPage";
+import {React} from "react";
 import commonConstants from "./constants/commonConstants";
 
 function App() {
+  
   return (
     <Router>
       <Navbar />

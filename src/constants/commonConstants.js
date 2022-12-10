@@ -18,6 +18,8 @@ const commonConstants = {
   dogeImageSrc,
   sadDogeImageSrc,
   weeeDogeImageSrc,
+  dogeWeeeImageSrc,
+  dogeSadImageSrc,
   rootRoute,
   linkTypePrev,
   linkTypeNext,

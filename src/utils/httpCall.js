@@ -1,6 +1,6 @@
 export const httpCall = async (http, method, token, body) => {
   let req = {};
-
+  
   if (token != null) {
     req = await fetch(http, {
       method: method,
