@@ -4,6 +4,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Card from "@mui/joy/Card";
 import Container from "@mui/material/Container";
+import Cookies from "js-cookie";
 import Fab from "@mui/material/Fab";
 import PetsIcon from "@mui/icons-material/Pets";
 import Question from "../Components/Question";
@@ -13,6 +14,7 @@ import Swal from "sweetalert2";
 import apiRoutes from "../constants/apiRoutes";
 import commonStyle from "../css/commonStyle";
 import { httpCall } from "../utils/httpCall";
+import jwt_decode from "jwt-decode";
 
 const theme = createTheme({
   palette: {
@@ -24,7 +26,7 @@ const theme = createTheme({
 
 function QuizPage() {
   const quizNum = 5; // TODO
-  const [userId, setUserId] = useState(1); // To be changed after login branch is merged
+  const [userId, setUserId] = useState(null); // To be changed after login branch is merged
   const [quizId, setQuizId] = useState(null);
   const [quiz, setQuiz] = useState(null);
   const [userAnswer, setUserAnswer] = useState(new Map());
@@ -44,6 +46,14 @@ function QuizPage() {
     setShowAnswer(false);
     setScore(null);
   };
+
+  const getUserId = async () => {
+    const allCookies = Cookies.get();
+    if (allCookies.id_token) {
+      const decoded = jwt_decode(allCookies.id_token);
+      setUserId(decoded.sub);
+    }
+  }
 
   const handleSubmit = async (event) => {
     if (userAnswer.size != quiz.length) {
@@ -71,6 +81,7 @@ function QuizPage() {
   };
 
   useEffect(() => {
+    getUserId();
     getQuiz();
   }, []);
 
