@@ -1,9 +1,7 @@
-import { React, useEffect, useState } from "react";
-
 import AspectRatio from "@mui/joy/AspectRatio";
 import Box from "@mui/material/Box";
 import Card from "@mui/joy/Card";
-import TypographyJoy from "@mui/joy/Typography";
+import { React } from "react";
 import commonConstants from "../constants/commonConstants";
 import quizPageStyle from "../css/quizPageStyle";
 
