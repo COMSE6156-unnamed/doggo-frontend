@@ -41,6 +41,9 @@ function ProfilePage() {
     getUserInfo();
   }, []);
 
+  const score_exist = scoreUrl != commonConstants.sadDogeImageSrc;
+  const quiz_history_title = score_exist ? "Average Score"
+                                         : "No quiz history. You are just a potato 😔" ;
   return (
     <Container
       maxWidth={false}
@@ -78,22 +81,12 @@ function ProfilePage() {
       </Card>
 
       <Card sx={{ width: "75%" }}>
-        {scoreUrl != commonConstants.sadDogeImageSrc && (
-          <CardHeader title="Average Score" sx={{ paddingTop: 5, paddingRight: 5, paddingLeft: 5, paddingBottom: 2 }} />
-        )}
-        {scoreUrl == commonConstants.sadDogeImageSrc && (
-          <CardHeader title="No quiz history. You are just a potato 😔" sx={{ paddingTop: 5, paddingRight: 5, paddingLeft: 5, paddingBottom: 2 }} />
-        )}
-        {scoreUrl != commonConstants.sadDogeImageSrc && (
-          <AspectRatio sx={{ margin: 5 }}>
-            <img src={scoreUrl} alt="" />
-          </AspectRatio>
-        )}
-        {scoreUrl == commonConstants.sadDogeImageSrc && (
-          <AspectRatio ratio="1" sx={{ margin: 5 }}>
-            <img src={scoreUrl} alt="" />
-          </AspectRatio>
-        )}
+
+        <CardHeader title={quiz_history_title} sx={{ paddingTop: 5, paddingRight: 5, paddingLeft: 5, paddingBottom: 2 }} />
+
+        <AspectRatio ratio={score_exist ? "16/9" : "1"} sx={{ margin: 5 }}>
+          <img src={scoreUrl} alt="" />
+        </AspectRatio>
 
         <CardContent
           sx={{
