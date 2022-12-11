@@ -7,6 +7,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Cookies from "js-cookie";
 import Typography from "@mui/material/Typography";
+import commonConstants from "../constants/commonConstants";
 import { httpCall } from "../utils/httpCall";
 import jwt_decode from "jwt-decode";
 import userConstants from "../constants/userConstants";
@@ -15,22 +16,24 @@ function ProfilePage() {
   const [email, setEmail] = useState(false);
   const [name, setName] = useState("");
   const [pictureUrl, setPictureUrl] = useState("");
-  const [scoreUrl, setScoreUrl] = useState(null);
+  const [scoreUrl, setScoreUrl] = useState(commonConstants.sadDogeImageSrc);
   const getUserInfo = async () => {
     const allCookies = Cookies.get();
     if (allCookies.id_token) {
       const decoded = jwt_decode(allCookies.id_token);
-
       setEmail(decoded.email);
       setName(decoded.name);
       setPictureUrl(decoded.picture);
+      
       const response = await httpCall(
         `${process.env.REACT_APP_API_GATEWAY_ENDPOINT}/user/${decoded.sub}/quiz/avg_score`
       );
-      const scoreString = response.avg_scores.join(',');
-      const quizIdString = response.quiz_ids.join(',');
-      const scoreUrlCopy = `${userConstants.scoreAPIEndpoint}?data1=${scoreString}&labels=${quizIdString}`;
-      setScoreUrl(scoreUrlCopy);
+      if (response.avg_scores.length > 0) {
+        const scoreString = response.avg_scores.join(",");
+        const quizIdString = response.quiz_ids.join(",");
+        const scoreUrlCopy = `${userConstants.scoreAPIEndpoint}?data1=${scoreString}&labels=${quizIdString}`;
+        setScoreUrl(scoreUrlCopy);
+      }
     }
   };
 
@@ -75,13 +78,23 @@ function ProfilePage() {
       </Card>
 
       <Card sx={{ width: "75%" }}>
-        <CardHeader title="Average Score" sx={{ padding: 5 }} />
-        <AspectRatio sx={{ margin: 5 }}>
-          <img
-            src={scoreUrl}
-            alt=""
-          />
-        </AspectRatio>
+        {scoreUrl != commonConstants.sadDogeImageSrc && (
+          <CardHeader title="Average Score" sx={{ paddingTop: 5, paddingRight: 5, paddingLeft: 5, paddingBottom: 2 }} />
+        )}
+        {scoreUrl == commonConstants.sadDogeImageSrc && (
+          <CardHeader title="No quiz history. You are just a potato 😔" sx={{ paddingTop: 5, paddingRight: 5, paddingLeft: 5, paddingBottom: 2 }} />
+        )}
+        {scoreUrl != commonConstants.sadDogeImageSrc && (
+          <AspectRatio sx={{ margin: 5 }}>
+            <img src={scoreUrl} alt="" />
+          </AspectRatio>
+        )}
+        {scoreUrl == commonConstants.sadDogeImageSrc && (
+          <AspectRatio ratio="1" sx={{ margin: 5 }}>
+            <img src={scoreUrl} alt="" />
+          </AspectRatio>
+        )}
+
         <CardContent
           sx={{
             justifyContent: "center",
