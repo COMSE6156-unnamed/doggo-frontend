@@ -2,7 +2,6 @@ import { React, useEffect, useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
-import Card from "@mui/joy/Card";
 import Container from "@mui/material/Container";
 import Cookies from "js-cookie";
 import Fab from "@mui/material/Fab";
@@ -12,9 +11,11 @@ import ScoreCard from "../Components/ScoreCard";
 import Stack from "@mui/material/Stack";
 import Swal from "sweetalert2";
 import apiRoutes from "../constants/apiRoutes";
+import commonConstants from "../constants/commonConstants";
 import commonStyle from "../css/commonStyle";
 import { httpCall } from "../utils/httpCall";
 import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -26,6 +27,7 @@ const theme = createTheme({
 
 function QuizPage() {
   const quizNum = 5; // TODO
+  let navigate = useNavigate();
   const [userId, setUserId] = useState(null); // To be changed after login branch is merged
   const [quizId, setQuizId] = useState(null);
   const [quiz, setQuiz] = useState(null);
@@ -52,8 +54,10 @@ function QuizPage() {
     if (allCookies.id_token) {
       const decoded = jwt_decode(allCookies.id_token);
       setUserId(decoded.sub);
+    } else {
+      return navigate(commonConstants.badDogRoute);
     }
-  }
+  };
 
   const handleSubmit = async (event) => {
     if (userAnswer.size != quiz.length) {
@@ -84,44 +88,43 @@ function QuizPage() {
     getUserId();
     getQuiz();
   }, []);
-
-  return (
-    <Container maxWidth={false} sx={commonStyle.pageContainerStyle}>
-      <Stack spacing={2}>
-        {showAnswer && <ScoreCard score={score} />}
-        {quiz &&
-          quiz.map((question) => (
-            <Question
-              key={question.question_id}
-              question={question}
-              userAnswer={userAnswer}
-              setUserAnswer={setUserAnswer}
-              showAnswer={showAnswer}
-              submitResponse={
-                submitResponse ? submitResponse[question.question_id] : null
-              }
-            />
-          ))}
-      </Stack>
-      <ThemeProvider theme={theme}>
-        <Box
-          sx={{
-            "& > :not(style)": { m: 1 },
-            position: "fixed",
-            bottom: 20,
-            right: 20,
-          }}
-        >
-          {!showAnswer && (
-            <Fab variant="extended" color="primary" onClick={handleSubmit}>
-              <PetsIcon sx={{ mr: 1 }} />
-              Submit
-            </Fab>
-          )}
-        </Box>
-      </ThemeProvider>
-    </Container>
-  );
+    return (
+      <Container maxWidth={false} sx={commonStyle.pageContainerStyle}>
+        <Stack spacing={2}>
+          {showAnswer && <ScoreCard score={score} />}
+          {quiz &&
+            quiz.map((question) => (
+              <Question
+                key={question.question_id}
+                question={question}
+                userAnswer={userAnswer}
+                setUserAnswer={setUserAnswer}
+                showAnswer={showAnswer}
+                submitResponse={
+                  submitResponse ? submitResponse[question.question_id] : null
+                }
+              />
+            ))}
+        </Stack>
+        <ThemeProvider theme={theme}>
+          <Box
+            sx={{
+              "& > :not(style)": { m: 1 },
+              position: "fixed",
+              bottom: 20,
+              right: 20,
+            }}
+          >
+            {!showAnswer && (
+              <Fab variant="extended" color="primary" onClick={handleSubmit}>
+                <PetsIcon sx={{ mr: 1 }} />
+                Submit
+              </Fab>
+            )}
+          </Box>
+        </ThemeProvider>
+      </Container>
+    );
 }
 
 export default QuizPage;

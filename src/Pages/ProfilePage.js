@@ -1,3 +1,4 @@
+import { Navigate, useNavigate } from "react-router-dom";
 import { React, useEffect, useState } from "react";
 
 import AspectRatio from "@mui/joy/AspectRatio";
@@ -7,12 +8,14 @@ import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Cookies from "js-cookie";
 import Typography from "@mui/material/Typography";
+import { common } from "@mui/material/colors";
 import commonConstants from "../constants/commonConstants";
 import { httpCall } from "../utils/httpCall";
 import jwt_decode from "jwt-decode";
 import userConstants from "../constants/userConstants";
 
 function ProfilePage() {
+  let navigate = useNavigate();
   const [email, setEmail] = useState(false);
   const [name, setName] = useState("");
   const [pictureUrl, setPictureUrl] = useState("");
@@ -34,6 +37,8 @@ function ProfilePage() {
         const scoreUrlCopy = `${userConstants.scoreAPIEndpoint}?data1=${scoreString}&labels=${quizIdString}`;
         setScoreUrl(scoreUrlCopy);
       }
+    } else {
+      return navigate(commonConstants.badDogRoute);
     }
   };
 
