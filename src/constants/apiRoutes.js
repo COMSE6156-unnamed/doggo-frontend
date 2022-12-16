@@ -7,6 +7,7 @@ const createDog = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT}/user_creates_do
 const loginRoute = `${process.env.REACT_APP_USER_API_HOST}/login`;
 const logoutRoute = `${process.env.REACT_APP_USER_API_HOST}/logout`;
 const quizBasePath = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT}/quiz`;
+const getUserRoute = `${process.env.REACT_APP_USER_API_HOST}/user`;
 const apiRoutes = {
     getAllDogs,
     getCategories,
@@ -15,7 +16,8 @@ const apiRoutes = {
     createDog,
     loginRoute,
     logoutRoute,
-    quizBasePath
+    quizBasePath,
+    getUserRoute
 }
 
 export default apiRoutes;

@@ -8,6 +8,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Cookies from "js-cookie";
 import Typography from "@mui/material/Typography";
+import apiRoutes from "../constants/apiRoutes";
 import commonConstants from "../constants/commonConstants";
 import { httpCall } from "../utils/httpCall";
 import jwt_decode from "jwt-decode";
@@ -15,20 +16,32 @@ import userConstants from "../constants/userConstants";
 
 function ProfilePage() {
   let navigate = useNavigate();
+  const [userId, setUserId] = useState(null);
   const [email, setEmail] = useState(false);
   const [name, setName] = useState("");
   const [pictureUrl, setPictureUrl] = useState("");
+  const [dogNum, setDogNum] = useState(0);
   const [scoreUrl, setScoreUrl] = useState(commonConstants.sadDogeImageSrc);
   const getUserInfo = async () => {
     const allCookies = Cookies.get();
     if (allCookies.id_token) {
       const decoded = jwt_decode(allCookies.id_token);
-      setEmail(decoded.email);
-      setName(decoded.name);
-      setPictureUrl(decoded.picture);
+      const user_id = decoded.sub;
+      const userObject = await httpCall(
+        apiRoutes.getUserRoute+'/'+user_id,
+        "GET",
+        null,
+        null
+      )
+    
+      setUserId(userObject[0].user_id);
+      setName(userObject[0].user_name);
+      setEmail(userObject[0].user_email);
+      setPictureUrl(userObject[0].picture);
+      setDogNum(userObject[0].dog_num);
       
       const response = await httpCall(
-        `${process.env.REACT_APP_API_GATEWAY_ENDPOINT}/user/${decoded.sub}/quiz/avg_score`
+        `${process.env.REACT_APP_API_GATEWAY_ENDPOINT}/user/${user_id}/quiz/avg_score`
       );
       if (response.avg_scores.length > 0) {
         const scoreString = response.avg_scores.join(",");
@@ -80,6 +93,9 @@ function ProfilePage() {
           <CardHeader title={name} px={2} />
           <Typography variant="body2" color="text.secondary" px={3}>
             Email: {email}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" px={3}>
+            Dogs Created: {dogNum}
           </Typography>
         </CardContent>
       </Card>
