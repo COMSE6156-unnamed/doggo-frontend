@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Cookies from "js-cookie";
+import CreateDogPage from "../Pages/CreateDogPage";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import Menu from "@mui/material/Menu";
@@ -134,6 +135,9 @@ function Navbar() {
                 >
                   <MenuItem onClick={handleClose}>
                     <Link to={commonConstants.profileRoute}>Profile</Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Link to={commonConstants.createDogRoute}>Create Dog</Link>
                   </MenuItem>
                   <MenuItem onClick={logout}>Logout</MenuItem>
                 </Menu>
