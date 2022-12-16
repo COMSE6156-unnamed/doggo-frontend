@@ -3,6 +3,7 @@ import "./App.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import BadDogPage from "./Pages/BadDogPage";
+import CreateDogPage from "./Pages/CreateDogPage";
 import DogPage from "./Pages/DogPage";
 import HomePage from "./Pages/HomePage";
 import Navbar from "./Components/Navbar";
@@ -22,6 +23,7 @@ function App() {
         <Route path={commonConstants.dogRoute} element={<DogPage />} />
         <Route path={commonConstants.quizRoute} element={<QuizPage />} />
         <Route path={commonConstants.badDogRoute} element={<BadDogPage />} />
+        <Route path={commonConstants.createDogRoute} element={<CreateDogPage />} />
       </Routes>
     </Router>
   );

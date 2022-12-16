@@ -8,7 +8,6 @@ import CardHeader from "@mui/material/CardHeader";
 import Container from "@mui/material/Container";
 import Cookies from "js-cookie";
 import Typography from "@mui/material/Typography";
-import { common } from "@mui/material/colors";
 import commonConstants from "../constants/commonConstants";
 import { httpCall } from "../utils/httpCall";
 import jwt_decode from "jwt-decode";

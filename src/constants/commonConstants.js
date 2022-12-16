@@ -7,6 +7,7 @@ const profileRoute = "/profile";
 const quizRoute = "/quiz";
 const rootRoute = "/";
 const badDogRoute = "/baddog";
+const createDogRoute = "/createdog";
 
 // Pagination links, rel property
 const linkTypeCurr = "current";
@@ -18,6 +19,7 @@ const commonConstants = {
   profileRoute,
   quizRoute,
   badDogRoute,
+  createDogRoute,
   dogeImageSrc,
   sadDogeImageSrc,
   weeeDogeImageSrc,
